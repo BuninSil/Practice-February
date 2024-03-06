@@ -1,0 +1,315 @@
+﻿<Window x:Class="DataGrid.Postyplenie"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataGrid"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+        xmlns:UserControls="clr-namespace:DataGrid.UserControls" 
+        mc:Ignorable="d"
+        Height="720" Width="1080" WindowStartupLocation="CenterScreen" AllowsTransparency="True"
+        Background="Transparent" WindowStyle="None">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+
+
+    <Border CornerRadius="30" Background="#EFF2F7" MouseDown="Border_MouseDown">
+
+        <Grid>
+            
+            
+            <TextBlock x:Name="log" Visibility="Hidden" Text=""/>
+            <TextBlock x:Name="pass" Visibility="Hidden" Text=""/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Left Menu-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" MinHeight="93"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!--Menu Icon-->
+                    
+
+                    <Border Background="#006400" CornerRadius="0 50 0 30" Grid.Row="1" >
+                        <DockPanel>
+                            <!--Menu Logo-->
+                            <Border Width="100" Height="100" Padding="3" Background="White" CornerRadius="100" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -25 0 0">
+                                <Ellipse>
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="/Images/p2.jpg"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Border>
+
+                            <!--Menu Titles-->
+                            <TextBlock x:Name="name" Foreground="White" FontSize="22" FontWeight="SemiBold" DockPanel.Dock="Top" Margin="5 50 0 10" TextAlignment="Center" Height="56"><Run Language="ru-ru" Text="Приемная комиссия" FontSize="20"/><LineBreak/><Run Language="ru-ru"/></TextBlock>
+
+                            <!--Menu Seprator-->
+                            <Separator Margin="21" Background="#228B20" DockPanel.Dock="Top" Height="1"/>
+
+                            <!--Menu Buttons-->
+
+                            <StackPanel DockPanel.Dock="Top" >
+                                <Button Click="Button_Click_1" Style="{StaticResource menuButton}" Background="#006400" Foreground="White" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}" Foreground="#FFC0C0B6"/>
+                                        <TextBlock Text="Все заявления" Foreground="#FFC0C0B6"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button Click="Button_Click" Style="{StaticResource menuButton}" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock Text="Анкета"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button Click="Button_Click_2" Style="{StaticResource menuButton}" Background="Green">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}" Foreground="White"/>
+                                        <TextBlock Text="Поступлениее" Foreground="White"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button Click="Button_Click_3" Style="{StaticResource menuButton}" Background="DarkGreen" Foreground="DarkGreen" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}" Foreground="Silver"/>
+                                        <TextBlock Text="Профессионалитет" Foreground="Silver"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </StackPanel>
+
+                            <Button Click="Button_Click_4" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
+                                <StackPanel Orientation="Horizontal">
+                                    <iconPacks:PackIconMaterial Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Выход"/>
+                                </StackPanel>
+                            </Button>
+
+                        </DockPanel>
+                    </Border>
+
+                </Grid>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="1" Margin="30 20 10 20" >
+
+                    <!--Main Section-->
+                    <Grid VerticalAlignment="Center" >
+                        
+                        <!--Main Layer-->
+                        <Border CornerRadius="20" Background="#ffffff" >
+                            <Border.Effect>
+                                <DropShadowEffect Direction="-130" BlurRadius="30" ShadowDepth="20" Opacity="0.1"/>
+                            </Border.Effect>
+                            
+                            <Grid>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <!--Search Textbox-->
+                                    <Grid Width="300" HorizontalAlignment="Left" Margin="530,0,0,0"
+                                       Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}">
+
+                                    </Grid>
+
+                                    <!--Top Buttons-->
+                                    <Button Click="Button_Click_5" Style="{StaticResource topButton}" Margin="900,10,0,18"  Grid.Column="1" HorizontalAlignment="Left">
+                                        <iconPacks:PackIconMaterial Kind="AlphaXCircleOutline" Height="30" Width="30" RenderTransformOrigin="5.99,0.397"/>
+                                    </Button>
+
+                                    <Button Style="{StaticResource topButton}" Margin="746,10,0,18" HorizontalAlignment="Left" Click="Button_Click_5"/>
+
+                                    <!--Page Title-->
+                                    <StackPanel Orientation="Horizontal" Margin="20 20 0 0">
+
+                                        <Ellipse Width="40" Height="40">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="\Images\p2.jpg"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+
+                                        <TextBlock Text="Поступление" Foreground="#374655" FontSize="18" Margin="15 0 0 0" VerticalAlignment="Center"/>
+
+
+                                    </StackPanel>
+                                    <!--Seprator-->
+                                    <Separator Height="1" Grid.Row="4" Background="#DAE2EA" Margin="-10,26,10,25"/>
+
+                                    <!--Counter Title-->
+                                    <TextBlock Grid.Row="4" FontSize="18" FontWeight="SemiBold" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                                    <!--Filter Textbox-->
+                                    <Grid Width="200" HorizontalAlignment="Left" Grid.Row="4" Margin="620,0,0,2"/>
+
+                                    <TextBlock HorizontalAlignment="Left" Margin="27,259,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+                                </Grid>
+
+                                <Grid Margin="25,66,25,20" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--Form Bottom Background-->
+
+                                    <!--Form Title-->
+                                    <StackPanel Orientation="Horizontal" Margin="20,0,0,33" Grid.Row="1"/>
+
+                                    <!--Form Percentage-->
+                                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,33" Grid.Row="1">
+
+                                        <StackPanel Margin="10 0 0 0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+
+                                    <!--Inputs-->
+                                    <UserControls:MyTextBox x:Name="FIO" Grid.Column="0" Grid.Row="2" Caption="Фио" Hint="Введите фио абитуриента" Loaded="FIO_Loaded"/>
+                                    <UserControls:MyTextBox x:Name="ddsAas" Grid.Column="0" Grid.Row="3" Caption="Дата рождения" Hint="Введите дату рождения"/>
+                                    <UserControls:MyTextBox x:Name="palaserod" Grid.Column="0" Grid.Row="4" Caption="Место рождения" Hint=""/>
+                                    <UserControls:MyTextBox x:Name="adrresjiv" Grid.Column="0" Grid.Row="5" Caption="Проживаю по адресу" Hint=""/>
+                                    <UserControls:MyTextBox x:Name="FormStudy"  Grid.Column="0" Grid.Row="6" Caption="СНИЛС" Hint="Введите СНИЛС"/>
+                                    <UserControls:MyTextBox x:Name="okonch" Grid.Column="0" Grid.Row="7" Caption="Окончил(а) в году" Hint=""/>
+                                    <UserControls:MyTextBox x:Name="Language" Grid.Column="0" Grid.Row="8" Caption="Нуждается в общежитии"/>
+                                    <ComboBox x:Name="comboBox5" Margin="20,35,20,10" Grid.Row="8" SelectionChanged="comboBox5_SelectionChanged">
+                                        <ComboBoxItem Content="да"/>
+                                        <ComboBoxItem Content="нет"/>
+                                    </ComboBox>
+
+                                    <UserControls:MyTextBox x:Name="grajd" Grid.Column="1" Grid.Row="2" Caption="Гражданство" Hint=""/>
+                                    <UserControls:MyTextBox x:Name="dokilich" Grid.Column="1"  Grid.Row="3" Caption="Документ удостоверяющий личность" Hint="Введите серию и номер паспорта"/>
+                                    <UserControls:MyTextBox x:Name="serianomer" Grid.Column="1" Grid.Row="4" Caption="Серия и номер" Hint=""/>
+                                    <UserControls:MyTextBox x:Name="kogdavdan" Grid.Column="1" Grid.Row="5" Caption="Согда и кем выдан" Hint=""/>
+                                    <UserControls:MyTextBox x:Name="OrigOrCopy_Copy" Grid.Column="1" Grid.Row="6" Caption="Нуждаается в специальных условиях"/>
+                                    <ComboBox x:Name="combobox9" Grid.Column="1"  Grid.Row="6"  Margin="20,35,20,10" SelectionChanged="combobox9_SelectionChanged" >
+                                        <ComboBoxItem Content="да"/>
+                                        <ComboBoxItem Content="нет"/>
+                                    </ComboBox>
+                                    <UserControls:MyTextBox x:Name="school" Grid.Column="1" Grid.Row="7" Caption="Образовательное учреждение" Hint=""/>
+                                    <UserControls:MyTextBox x:Name="NameSchool"  Grid.Column="1" Grid.Row="8" Caption="Семья"/>
+                                    <ComboBox x:Name="comboBox4"  Grid.Row="8" Grid.Column="1" Margin="20,35,20,10" SelectionChanged="comboBox4_SelectionChanged">
+                                        <ComboBoxItem Content="полная"/>
+                                        <ComboBoxItem Content="не полная"/>
+                                        <ComboBoxItem Content="сирота"/>
+                                    </ComboBox>
+
+                                    <UserControls:MyTextBox x:Name="NameSpeciality" Grid.Column="2" Grid.Row="2" Caption="Наименование специальности" />
+                                    <ComboBox x:Name="comboBox1" Grid.Column="2" Grid.Row="2" Margin="20,35,20,10"  SelectionChanged="comboBox1_SelectionChanged">
+                                        <ComboBoxItem Content="09.02.07 Информационные системы и программирование"/>
+                                        <ComboBoxItem Content="15.02.06 Монтаж и техническая эксплуатация холодильно-компрессорных машин и установок (по отраслям)"/>
+                                        <ComboBoxItem Content="15.02.14 Оснащение средствами автоматизации технологических процессов и производств"/>
+                                        <ComboBoxItem Content="21.02.04 Землеустройство"/>
+                                        <ComboBoxItem Content="21.02.05 Земельно-имущественные отношения"/>
+                                        <ComboBoxItem Content="23.02.07 Техническое обслуживание и ремонт двигателей, систем и агрегатов автомобилей"/>
+                                        <ComboBoxItem Content="23.02.04 Техническая эксплуатация подъемно-транспортных, строительных, дорожных машин и оборудования (по отраслям)"/>
+                                        <ComboBoxItem Content="35.02.16 Эксплуатация и ремонт сельскохозяйственной техники и оборудования"/>
+                                        <ComboBoxItem Content="38.02.07 Банковское дело"/>
+                                        <ComboBoxItem Content="38.02.01 Экономика и бухгалтерский учет (по отраслям)"/>
+                                        <ComboBoxItem Content="15.02.13 Техническое обслуживание и ремонт систем вентиляции и кондиционирования"/>
+                                        <ComboBoxItem Content="10.02.05 Обеспечение информационной безопасности автоматизированных систем"/>
+                                        <ComboBoxItem Content="25.02.08 Эксплуатация беспилотных авиационных систем"/>
+                                        <ComboBoxItem Content="38.02.03 Операционная деятельность в логистике"/>
+                                    </ComboBox>
+                                    <UserControls:MyTextBox x:Name="Photo" Grid.Column="2" Grid.Row="3" Caption="Форма обучения"/>
+                                    <ComboBox x:Name="comboBox2" Grid.Column="2"  Grid.Row="3" Margin="20,35,20,10" SelectionChanged="comboBox2_SelectionChanged">
+                                        <ComboBoxItem Content="очная"/>
+                                        <ComboBoxItem Content="заочная"/>
+                                    </ComboBox>
+                                    <UserControls:MyTextBox x:Name="YearEnd" Grid.Column="2" Grid.Row="4" Caption="Основание поступления "/>
+                                    <ComboBox x:Name="comboBox3" Grid.Column="2" Margin="20,35,20,10" Grid.Row="4" SelectionChanged="comboBox3_SelectionChanged">
+                                        <ComboBoxItem Content="бюджет"/>
+                                        <ComboBoxItem Content="договор"/>
+                                    </ComboBox>
+                                    <UserControls:MyTextBox x:Name="Ball" Grid.Column="2" Grid.Row="5" Caption="Категория граждан"/>
+                                    <ComboBox x:Name="comboBox7" Grid.Column="2" Grid.Row="5" Margin="20,35,20,10"  SelectionChanged="comboBox7_SelectionChanged">
+                                        <ComboBoxItem Content="дети-сироты; дети, оставшиеся без попечения родителей"/>
+                                        <ComboBoxItem Content="лица с ограниченными возможностями здоровья/ инвалид, инвалид детства"/>
+                                        <ComboBoxItem Content="ничего из перечисленного"/>
+                                    </ComboBox>
+                                    <UserControls:MyTextBox x:Name="OrigOrCopy_Copy1" Grid.Column="2" Grid.Row="6" Caption="Наименование вступительного испытания"/>
+                                    <UserControls:MyTextBox x:Name="FormPay" Grid.Column="2" Grid.Row="7" Caption="Образовательный документ" Hint="Введите серию и номер аттестата"/>
+                                    <UserControls:MyTextBox x:Name="OrigOrCopy" Grid.Column="2" Grid.Row="8" Caption="Оригинал/копия" />
+                                    <ComboBox x:Name="comboBox8" Grid.Column="2" Grid.Row="8"  Margin="20,35,20,10" SelectionChanged="comboBox8_SelectionChanged" >
+                                        <ComboBoxItem Content="оригинал"/>
+                                        <ComboBoxItem Content="копия"/>
+                                    </ComboBox>
+
+
+                                    <!--Main Button-->
+                                    <Button Click="Button_Click_7" Grid.Column="2" Grid.Row="11" Grid.ColumnSpan="2" Content="Сохранить данные"  Style="{StaticResource mainButton}">
+                                        <Button.Effect>
+                                            <DropShadowEffect Direction="-120" BlurRadius="10" Opacity="0.3" ShadowDepth="5" Color="#006400"/>
+                                        </Button.Effect>
+                                    </Button>
+
+                                    <Button Click="Button_Click_6" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="2" Content="Распечатать бланки"   Style="{StaticResource mainButton}">
+                                        <Button.Effect>
+                                            <DropShadowEffect Direction="-120" BlurRadius="10" Opacity="0.3" ShadowDepth="5" Color="#006400"/>
+                                        </Button.Effect>
+                                    </Button>
+
+
+
+
+
+                                    <UserControls:MyTextBox x:Name="telefon" Grid.Column="3" Grid.Row="2" Caption="Номер телефона" />
+                                    <UserControls:MyTextBox x:Name="emailvvodd" Grid.Column="3" Grid.Row="3" Caption="E-mail"/>
+                                    <UserControls:MyTextBox x:Name="indivdost" Grid.Column="3" Grid.Row="4" Caption="Индивидуальные достижения" />
+                                    <UserControls:MyTextBox x:Name="vpolnpor" Grid.Column="3" Grid.Row="5" Caption="Выполнял (а) общественные поручения"  />
+                                    <UserControls:MyTextBox x:Name="inlangs" Grid.Column="3" Grid.Row="6" Caption="Иностранный язык" />
+                                    <UserControls:MyTextBox x:Name="datavdachi" Grid.Column="3" Grid.Row="7" Caption="Дата выдачи" />
+                                    <UserControls:MyTextBox x:Name="Age" Grid.Column="3" Grid.Row="8" Caption="На базе какого класса"  />
+                                    <ComboBox x:Name="comboBox6" Grid.Row="8" Grid.Column="3"  Margin="20,35,20,10" SelectionChanged="comboBox6_SelectionChanged">
+                                        <ComboBoxItem Content="9 класса"/>
+                                        <ComboBoxItem Content="11 класса"/>
+                                    </ComboBox>
+
+                                    <UserControls:MyTextBox x:Name="mother" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" Caption="Сведения о матери"  Hint="ФИО, телефон, почтовый адрес"/>
+                                    <UserControls:MyTextBox x:Name="father" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="4" Caption="Сведения о отце" Hint="ФИО, телефон, почтовый адрес"/>
+
+
+                                </Grid>
+                                
+                            </Grid>
+                        </Border>
+                        <Button Click="Button_Click_1" Style="{StaticResource topButton}" HorizontalAlignment="Left" Margin="750,-770,0,0">
+                            <iconPacks:PackIconMaterial Kind="AlphaXCircleOutline" Height="30" Width="30"/>
+                        </Button>
+                    </Grid>
+                </ScrollViewer>
+               
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
